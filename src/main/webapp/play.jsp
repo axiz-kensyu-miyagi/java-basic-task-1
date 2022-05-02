@@ -4,22 +4,33 @@
 <%
         
     // 残数の更新処理(残数の取得、更新、保存など)    
-    int totalNum = 0;
+//     int totalNum = 0;
 	//残数用の変数。仮で25をセットしている。必要に応じて変更
 
    String totalNumStr =  (String)session.getAttribute("totalNum");  
    if (Utility.isNullOrEmpty(totalNumStr)) {
 		totalNumStr = "25";
+	}else{
+		
 	}
    
-   totalNum = Integer.parseInt(totalNumStr);
+   int totalNum = Integer.parseInt(totalNumStr);
    
-   String nums = request.getParameter("num");
-   if (nums != null && !nums.isEmpty()) {
-		int num = Integer.parseInt(nums);
-		totalNum = totalNum - num;
-		session.setAttribute(totalNum, totalNum);
+   int tn= 0 ;
+   
+   String numstr = request.getParameter("num");
+   if (Utility.isNullOrEmpty(numstr)) {
+	    numstr = "0";
 	}
+   int nums = Integer.parseInt(numstr);
+   tn = totalNum - nums;
+   
+   String s = Utility.getStoneDisplayHtml(tn);
+   
+   String tnStr = "" + tn;
+   
+   session.setAttribute("totalNum",tnStr);
+   
 //    Utility.isNullOrEmpty(str)
 
 // プレイヤーの切替処理(プレイヤーの取得、切替、保存など)
@@ -49,17 +60,17 @@
   <h1>石取りゲーム</h1>
 
   <div class="info">
-    <h2>
-      <% session.getAttribute("totalNum");
-      "残り："+ totalNum + "個"
+    <h2>石の総数
+      <%=
+       	tn
        %>
+       個
     </h2>
     <p class="stone">
-      <%
-      String stone = Utility.getStoneDisplayHtml(totalNum);
+      <%    
           // todo:このprint分は仮の処理。実装が完了したら削除する。
           // 表示する文字列("●●～")をメソッドを使い取得し、取得した文字列を表示する
-          out.println(stone);
+          out.println(s);
       %>
     </p>
   </div>
