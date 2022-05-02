@@ -4,10 +4,35 @@
 <%
         
     // 残数の更新処理(残数の取得、更新、保存など)    
-    int totalNum = 25;  // 残数用の変数。仮で25をセットしている。必要に応じて変更
+    int totalNum = 0;
+	//残数用の変数。仮で25をセットしている。必要に応じて変更
+
+   String totalNumStr =  (String)session.getAttribute("totalNum");  
+   if (Utility.isNullOrEmpty(totalNumStr)) {
+		totalNumStr = "25";
+	}
+   
+   totalNum = Integer.parseInt(totalNumStr);
+   
+   String nums = request.getParameter("num");
+   if (nums != null && !nums.isEmpty()) {
+		int num = Integer.parseInt(nums);
+		totalNum = totalNum - num;
+		session.setAttribute(totalNum, totalNum);
+	}
+//    Utility.isNullOrEmpty(str)
+
+// プレイヤーの切替処理(プレイヤーの取得、切替、保存など)
     
-    // プレイヤーの切替処理(プレイヤーの取得、切替、保存など)
     String player = "A";  // プレイヤー用の変数。仮で"A"をセットしている。必要に応じて変更
+    
+    if (player.equals("A")){
+    	out.println("A"); 
+    }else{
+    	out.println("B");	
+    } 
+  
+  
     
     // 残数が0以下の場合、結果ページへ遷移
     // (responseオブジェクトのsendRedirectメソッドを使用する)
@@ -25,13 +50,16 @@
 
   <div class="info">
     <h2>
-      残り：xx個
+      <% session.getAttribute("totalNum");
+      "残り："+ totalNum + "個"
+       %>
     </h2>
     <p class="stone">
       <%
+      String stone = Utility.getStoneDisplayHtml(totalNum);
           // todo:このprint分は仮の処理。実装が完了したら削除する。
           // 表示する文字列("●●～")をメソッドを使い取得し、取得した文字列を表示する
-          out.println("●●●●●●●●●●<br>●●●●●●●●●●<br>●●●●●");
+          out.println(stone);
       %>
     </p>
   </div>

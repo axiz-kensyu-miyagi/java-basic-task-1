@@ -7,6 +7,7 @@ public class Utility {
      * @param str
      * @return
      */
+
     public static boolean isNullOrEmpty(String str) {
         if(str == null || str.isEmpty()) {
             return true;
@@ -21,4 +22,17 @@ public class Utility {
      */
     // todo:ここにgetStoneDisplayHtmlメソッドを定義
 
+    public static String getStoneDisplayHtml(int stone) {
+
+    	String stoneDisplayHtml = "";
+    	for(int i=1; i <= stone; i++) {
+    		     stoneDisplayHtml += "●";
+    		if(i%10 == 0) {
+    			stoneDisplayHtml += "<br>";
+    		}
+    	}        
+        return stoneDisplayHtml ;
+    }
+
+    
 }
