@@ -34,5 +34,5 @@ public class Utility {
         return stoneDisplayHtml ;
     }
 
-    
+
 }

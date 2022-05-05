@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
 <%
     // セッションからプレイヤー名を取得する
-    
+ //   session.getAttribute(play.player);
     
 %>
 <!DOCTYPE html>
