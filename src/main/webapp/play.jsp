@@ -33,79 +33,22 @@
    session.setAttribute("totalNum",tnStr);  //
 
    
+   
 // プレイヤーの切替処理(プレイヤーの取得、切替、保存など)
-
-	String player = "A";   
-	String player1 = "B";
-	session.setAttribute("A", player);
-	session.setAttribute("B", player1);
+   
+		String player = (String)session.getAttribute("player");
 	
- 	while (totalNum < 0) {
- 		   
-		String playerstr = (String)session.getAttribute(player);
-	
-		if(Utility.isNullOrEmpty(playerstr)){
+		if(Utility.isNullOrEmpty(player)){
 			player = "A";
-		}else if(playerstr.equals("B")){
+		}else if(player.equals("B")){
 			player = "A";
-		}
-		session.setAttribute("A", player);
-		if(totalNum==1){
-			break;
-		}
-		
-		playerstr = (String)session.getAttribute(player1);
-	
-		if(Utility.isNullOrEmpty(playerstr)){
+		}else if(player.equals("A")){
 			player = "B";
-		}else if(playerstr.equals("A")){
-			player = "B";
-		
-		session.setAttribute("B", player1);
-
-		if(totalNum<=1){
-			break;
 		}
-	
- 	}		
-  
-   
-   
-//    session.setAttribute("", player);
-//     String player1 = "A";
-//     String player2 = "B";
-//     session.setAttribute("A", player1);
-//     session.setAttribute("B", player2);
-   
-// 	while (totalNum <= 0) {
 		
-// 		String playerstr = (String)session.getAttribute(player);
-		
-// 		if(Utility.isNullOrEmpty(playerstr)){
-// 			player = "A";
-// 		}else if(playerstr.equals("B")){
-// 			player = "A";
-// 		}
-// 		if(totalNum==1){
-// 			break;
-// 		}
-// 		session.setAttribute("A", player);
+		session.setAttribute("player", player);
 		
 		
-// 		playerstr = (String)session.getAttribute(player);
-		
-// 		if(playerstr.equals("A")){
-// 			player = "B";
-// 		}
-// 		if(totalNum<=1){
-// 			break;
-// 		}
-// 		session.setAttribute("B", player);
-		
-// }		
-
-
-	
 	// 残数が0以下の場合、結果ページへ遷移
 	// (responseオブジェクトのsendRedirectメソッドを使用する)
 
@@ -138,7 +81,8 @@
   </div>
   <div class="info">
     <h2>
-      プレイヤー<%=player%>の番
+      プレイヤー
+      <%=player%>の番
     </h2>
 
     <form action="play.jsp">
