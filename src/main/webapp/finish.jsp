@@ -2,8 +2,9 @@
   pageEncoding="UTF-8"%>
 <%
     // セッションからプレイヤー名を取得する
- //   session.getAttribute(play.player);
-    
+
+	String player = (String)session.getAttribute("player");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
   <h1>石取りゲーム</h1>
   <div class="info">
     <h2>
-      勝者：プレイヤーxx！！
+      勝者：プレイヤー<%=player %>！！
     </h2>
     <form action="index.jsp">
       <button class="btn" type="submit">先頭に戻る</button>
